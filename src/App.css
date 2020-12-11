@@ -1,7 +1,37 @@
 .App {
+  margin-top: 30px;
   text-align: center;
 }
-
+*{
+  margin: 0;
+  padding: 0;
+}
+.conten{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(55, 193, 248);
+}
+.contenbox{
+  display: flex;
+  align-items: center;
+}
+.list{
+  background-color: rgb(55, 193, 248);
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.list ul {
+  display: flex;
+  flex: 1;
+  height: 50px;
+  align-items: center;
+}
+.list ul li {
+  list-style: none;
+  flex: 1;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
