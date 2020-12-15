@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {filterArray} from '../modun'
 
 class question5 extends Component{
     constructor(props) {
@@ -15,26 +16,37 @@ class question5 extends Component{
         this.OnN = this.OnN.bind(this);
       }
 
+      result(array, n, ok) {
+        for (let i = 0; i < array.length - 1; i++) {
+            if(array[i] !==n && array[i] < n){
+                for (let j = i; j < array.length; j++) {
+                    if(array[j] !==n && array[j] < n){
+                        if (parseInt(array[i]) + parseInt(array[j]) == n) {
+                            if (i != j) {
+                                ok.push({ index1: i, index2: j });
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     handleSubmit(event) {      
         var a = this.state.value.split(",")
         var n = this.state.n
         var check = null
+        
         var ok = []
         if(a[1] === undefined){
             check = -1
             alert("Nhập sai form yêu cầu, vui lòng nhập lại!")
         }
-        for(let i=0; i<a.length-1; i++){
-            for(let j=i; j<a.length; j++){
-                if(parseInt(a[i]) + parseInt(a[j]) == n){
-                    if(i!= j){
-                        ok.push({index1: i, index2:j})
-                    }
-                    // console.log(a[i], a[j])
-                }
-            }
-            
-        }
+
+        // var array = filterArray(a,n)
+
+        // console.log(array)
+        this.result(a, n, ok);
         this.setState({ok:ok})
         event.preventDefault();
       }
@@ -50,7 +62,7 @@ class question5 extends Component{
         const {id, question} = this.props;
         const kq = this.state.ok.map((data, index) => {
             return (
-                <h1 key={index}>[ {data.index1} , {data.index2} ]</h1>
+                <h1 key={index}>[{data.index1} , {data.index2}]</h1>
             )
         })
         return(

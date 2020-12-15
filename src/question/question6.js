@@ -15,36 +15,31 @@ class question6 extends Component{
 
     handleSubmit(event) {      
         var number = this.state.value
-        
-        const fibonaci = (a) => {
-            if(a == 0 || a == 1){
-                return 1
-            }else{
-                return(fibonaci(a-2) + fibonaci(a-1))
-            }
-        }
-        var result = []
-        for(var i=0; i<number; i++){
-            // i[0]=i[1]=1
-            // if(i>=2){
-            //     number[i] = number[i-1] + number[i-2]
-            //     console.log(number[i])
-            // }
-            result.push(fibonaci(i))
-            if(0>=i>=1){
-                result.push(1)
-            }else{
-                for(var i=0; i<result.length; i++){
-                    console.log(result[parseInt(result.length)])
-                }
-                
-            }
+        var a = 1;
+		var b = 1;
+        var c;
+        var arrayResult = []
+		if(number<1)
+			console.log("Không tồn tại dãy số Fibonacci");
+		else if(number == 1)
+            arrayResult.push(a)
+		else if(number == 2)
+            arrayResult.push(a,b)
+		else
+		{
+			arrayResult.push(a,b)
+			for(var i=2; i<number;i++)
+			{
+				c = a+b;
+				arrayResult.push(c)
+				a = b;
+				b = c;
+			}
+			
+		}
 
-
-        }
-
-        console.log(result)
-
+        // console.log(arrayResult)
+        this.setState({array:arrayResult})
         event.preventDefault();
       }
 
@@ -54,6 +49,11 @@ class question6 extends Component{
 
     render(){
         const {id, question} = this.props;
+        const result = this.state.array.map((data,index) => {
+            return(
+            <h1 key={index} style={{marginRight:'10px'}}>{data}</h1>
+            )
+        })
         return(
             <div style={id === 6 ? {display:'block'} : {display:'none'}}  className="component">
                 <h5> câu 6: {question}</h5>
@@ -68,10 +68,12 @@ class question6 extends Component{
                                 placeholder="9999"
                         />
                     </label>
-                    <input style={{marginLeft:"5px"}} type="submit" value="Run" />
+                    <input style={{paddingRight:"5px"}} type="submit" value="Run" />
                 </form>
 
-
+                <div >
+                    {result}
+                </div>
 
                 </div>
             </div>

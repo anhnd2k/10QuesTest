@@ -19,7 +19,7 @@ class question8 extends Component{
         var a = this.state.value.split(",") 
         var max = findMax(a);
         var min = findMin(a);
-        this.setState({max : max, min : min})
+        this.setState({max : max[0], min : min})
         event.preventDefault();
       }
 
